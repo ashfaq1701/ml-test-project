@@ -1,6 +1,7 @@
 """Model builders and training utilities for DistilBERT."""
 from __future__ import annotations
 
+import inspect
 import logging
 from pathlib import Path
 from typing import Dict, Iterable, List, Sequence
@@ -71,20 +72,31 @@ def _compute_metrics(eval_pred):
 
 
 def _training_args(output_dir: Path, evaluation: bool = True) -> TrainingArguments:
-    return TrainingArguments(
-        output_dir=str(output_dir),
-        per_device_train_batch_size=BATCH_SIZE,
-        per_device_eval_batch_size=BATCH_SIZE,
-        gradient_accumulation_steps=GRADIENT_ACCUMULATION_STEPS,
-        learning_rate=LEARNING_RATE,
-        weight_decay=WEIGHT_DECAY,
-        num_train_epochs=NUM_EPOCHS,
-        evaluation_strategy="epoch" if evaluation else "no",
-        save_strategy="no",
-        logging_strategy="epoch",
-        load_best_model_at_end=False,
-        report_to=[],
-    )
+    params = inspect.signature(TrainingArguments).parameters
+
+    required_args = {
+        "output_dir": str(output_dir),
+        "per_device_train_batch_size": BATCH_SIZE,
+        "per_device_eval_batch_size": BATCH_SIZE,
+        "gradient_accumulation_steps": GRADIENT_ACCUMULATION_STEPS,
+        "learning_rate": LEARNING_RATE,
+        "weight_decay": WEIGHT_DECAY,
+        "num_train_epochs": NUM_EPOCHS,
+    }
+
+    optional_args = {
+        "evaluation_strategy": "epoch" if evaluation else "no",
+        "save_strategy": "no",
+        "logging_strategy": "epoch",
+        "load_best_model_at_end": False,
+        "report_to": [],
+    }
+
+    for key, value in optional_args.items():
+        if key in params:
+            required_args[key] = value
+
+    return TrainingArguments(**required_args)
 
 
 def run_cross_validation(
