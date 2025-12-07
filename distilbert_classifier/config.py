@@ -14,7 +14,7 @@ RESULTS_FILE = RESULTS_DIR / "result_distilbert_classification.csv"
 
 MODEL_NAME = "distilbert-base-uncased"
 MAX_SEQ_LENGTH = 128
-BATCH_SIZE = 8
+BATCH_SIZE = 32
 GRADIENT_ACCUMULATION_STEPS = 2
 LEARNING_RATE = 2e-5
 WEIGHT_DECAY = 0.01

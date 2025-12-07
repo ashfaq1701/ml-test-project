@@ -9,3 +9,4 @@ jupyter
 seaborn
 wordcount
 nltk
+accelerate>=0.26.0
