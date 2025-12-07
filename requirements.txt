@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+torch
+jupyter
+seaborn
+wordcount
+nltk
