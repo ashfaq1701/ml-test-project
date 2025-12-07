@@ -20,11 +20,6 @@ LOG_FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 
 def configure_logging(level: Optional[int] = None) -> None:
     """Configure application-wide logging if it is not already set.
-
-    Parameters
-    ----------
-    level: Optional[int]
-        Logging verbosity; defaults to ``logging.INFO``.
     """
     resolved_level = level or DEFAULT_LOG_LEVEL
     if logging.getLogger().handlers:
