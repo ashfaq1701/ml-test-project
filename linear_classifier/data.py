@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .model import RANDOM_STATE
+
 logger = logging.getLogger(__name__)
 
 
@@ -32,6 +34,10 @@ def load_datasets(paths: DatasetPaths) -> Dataset:
     train_df = pd.read_csv(paths.train)
     test_df = pd.read_csv(paths.test)
 
+    logger.info("Shuffling training data with random state %d", RANDOM_STATE)
+    train_df = train_df.sample(frac=1, random_state=RANDOM_STATE).reset_index(drop=True)
+    test_df = test_df.reset_index(drop=True)
+
     for required in ("text", "author"):
         if required not in train_df.columns:
             raise ValueError(f"Expected '{required}' column in training data")
@@ -47,7 +53,7 @@ def load_datasets(paths: DatasetPaths) -> Dataset:
     )
     label_counts = train_df["author"].value_counts().to_dict()
     logger.info("Class distribution: %s", label_counts)
-    return Dataset(train=train_df.reset_index(drop=True), test=test_df.reset_index(drop=True))
+    return Dataset(train=train_df, test=test_df)
 
 
 __all__ = ["DatasetPaths", "Dataset", "load_datasets"]
