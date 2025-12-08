@@ -11,6 +11,7 @@ TRAIN_PATH = DATA_DIR / "train.csv"
 TEST_PATH = DATA_DIR / "test.csv"
 RESULTS_DIR = PROJECT_ROOT / "results"
 RESULTS_FILE = RESULTS_DIR / "result_distilbert_classification.csv"
+SAVED_MODELS_DIR = RESULTS_DIR / "saved_models" / "distilbert"
 
 MODEL_NAME = "distilbert-base-uncased"
 MAX_SEQ_LENGTH = 128

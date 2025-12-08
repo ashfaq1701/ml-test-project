@@ -13,7 +13,7 @@ from .config import (
     TRAIN_PATH,
     VALIDATION_SPLIT,
     RANDOM_STATE,
-    configure_logging,
+    configure_logging, SAVED_MODELS_DIR,
 )
 from .data import DatasetPaths, load_datasets, to_hf_dataset
 from .model import (
@@ -55,6 +55,11 @@ def run_distilbert_pipeline() -> Path:
         label2id=dataset_bundle.label2id,
         output_dir=RESULTS_FILE.parent / "distilbert_final",
     )
+
+    trainer.save_model(SAVED_MODELS_DIR)  # saves model weights + config
+    tokenizer.save_pretrained(SAVED_MODELS_DIR)
+
+    logger.info("Saved trained model to %s", SAVED_MODELS_DIR)
 
     predictions = predict_labels(trainer, tokenized_test, dataset_bundle.id2label)
 

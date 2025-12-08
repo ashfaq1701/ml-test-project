@@ -12,6 +12,7 @@ TRAIN_PATH = DATA_DIR / "train.csv"
 TEST_PATH = DATA_DIR / "test.csv"
 RESULTS_DIR = PROJECT_ROOT / "results"
 RESULTS_FILE = RESULTS_DIR / "result_linear_classification.csv"
+SAVED_MODELS_PATH = RESULTS_DIR / "saved_models" / "linear_classifier" / "model.joblib"
 
 
 DEFAULT_LOG_LEVEL = logging.INFO

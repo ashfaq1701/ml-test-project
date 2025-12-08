@@ -4,9 +4,10 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+import joblib
 import pandas as pd
 
-from .config import RESULTS_FILE, TEST_PATH, TRAIN_PATH, configure_logging
+from .config import RESULTS_FILE, TEST_PATH, TRAIN_PATH, configure_logging, SAVED_MODELS_PATH
 from .data import DatasetPaths, load_datasets
 from .features import build_vectorizer
 from .model import CV_FOLDS, build_model, evaluate_model, fit_model
@@ -36,6 +37,10 @@ def run_linear_pipeline() -> Path:
     evaluate_model(pipeline, X_train, y_train)
 
     trained_pipeline = fit_model(pipeline, X_train, y_train)
+
+    joblib.dump(trained_pipeline, SAVED_MODELS_PATH)
+    logger.info("Saved trained model to %s", SAVED_MODELS_PATH)
+
     predictions = trained_pipeline.predict(dataset.test["text"])
 
     results_df = pd.DataFrame({"author": predictions})
