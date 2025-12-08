@@ -51,7 +51,7 @@ def run_distilbert_pipeline() -> Path:
     dataset_splits = _train_eval_split(tokenized_train)
     trainer = train_final_model(
         tokenized_train=dataset_splits["train"],
-        tokenized_eval=dataset_splits["eval"],
+        tokenized_eval=dataset_splits["test"],
         label2id=dataset_bundle.label2id,
         output_dir=RESULTS_FILE.parent / "distilbert_final",
     )
