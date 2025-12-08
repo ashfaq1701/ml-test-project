@@ -88,8 +88,9 @@ def _training_args(output_dir: Path, evaluation: bool = True) -> TrainingArgumen
         "evaluation_strategy": "epoch" if evaluation else "no",
         "save_strategy": "no",
         "logging_strategy": "epoch",
+        "logging_dir": str(output_dir / "logs"),
         "load_best_model_at_end": False,
-        "report_to": [],
+        "report_to": ["tensorboard"],
     }
 
     for key, value in optional_args.items():
