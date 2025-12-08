@@ -11,3 +11,4 @@ wordcount
 nltk
 accelerate>=0.26.0
 tensorboardX
+tensorboard
