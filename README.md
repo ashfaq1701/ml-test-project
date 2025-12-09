@@ -5,6 +5,7 @@ This repository implements two complementary approaches to predict the author of
 ## Project map
 - **Exploratory analysis:** [`data_exploration.ipynb`](data_exploration.ipynb)
 - **Pipeline notebooks:** [`run_linear_classifier.ipynb`](run_linear_classifier.ipynb), [`run_distilbert_classifier.ipynb`](run_distilbert_classifier.ipynb)
+- **Inference notebook:** [`predict_using_saved_models.ipynb`](predict_using_saved_models.ipynb)
 - **Pipeline scripts:** [`run_linear_classifier.py`](run_linear_classifier.py), [`run_distilbert_classifier.py`](run_distilbert_classifier.py)
 - **Model outputs:** [`results/result_linear_classification.csv`](results/result_linear_classification.csv), [`results/result_distilbert_classification.csv`](results/result_distilbert_classification.csv)
 - **Final submission:** [`result.csv`](result.csv)
